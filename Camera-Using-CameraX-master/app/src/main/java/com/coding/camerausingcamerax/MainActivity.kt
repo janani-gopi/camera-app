@@ -308,9 +308,18 @@ class MainActivity : AppCompatActivity() {
                 this, cameraSelector, preview, imageCapture,videoCapture
             )
             setUpZoomTapToFocus()
+            //setShorterPreviewHeight()
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+
+
+    // Add a new function to set a custom shorter height
+    private fun setShorterPreviewHeight() {
+        val shorterRatio = "H,16:7" // This will make the height shorter than 16:9
+        setAspectRatio(shorterRatio)
     }
 
     private fun setUpZoomTapToFocus(){

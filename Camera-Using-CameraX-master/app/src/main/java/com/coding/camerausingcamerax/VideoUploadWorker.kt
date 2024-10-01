@@ -20,7 +20,7 @@ class VideoUploadWorker (
         // Retrieve file details from inputData
         val videoPath = inputData.getString("video_path") ?: return Result.failure()
         val fileName = inputData.getString("file_name") ?: return Result.failure()
-
+        Log.d("#####",videoPath);
         // Create or get the video file from the path
         val videoFile = File(videoPath, fileName)
         if (!videoFile.exists()) {
@@ -36,35 +36,37 @@ class VideoUploadWorker (
             }
         }
 
+        return Result.success()
+
         // Upload the video and handle the response
-        val response = uploadVideo(videoFile)
-
-        return if (response.isSuccessful) {
-            Result.success()
-        } else {
-            Result.retry() // Retry if the upload fails
-        }
+//        val response = uploadVideo(videoFile)
+//
+//        return if (response.isSuccessful) {
+//            Result.success()
+//        } else {
+//            Result.retry() // Retry if the upload fails
+//        }
     }
 
-    private fun uploadVideo(videoFile: File): Response {
+   // private fun uploadVideo(videoFile: File): Response {
 
 
-        // Prepare the multipart body for file upload
-        val requestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FOval client = OkHttpClient()RM)
-            .addFormDataPart(
-                "file", videoFile.name,
-                RequestBody.create("video/mp4".toMediaTypeOrNull(), videoFile)
-            )
-            .build()
-
-        // Create the POST request to the API endpoint
-        val request = Request.Builder()
-            .url("https://api.cloudinary.com/v1_1/dvwtwyunm/video/upload") // Replace with your API endpoint
-            .post(requestBody)
-            .build()
-
-        // Execute the request
-        return client.newCall(request).execute()
-    }
+//        // Prepare the multipart body for file upload
+//        val requestBody = MultipartBody.Builder()
+//            .setType(MultipartBody.FOval client = OkHttpClient()RM)
+//            .addFormDataPart(
+//                "file", videoFile.name,
+//                RequestBody.create("video/mp4".toMediaTypeOrNull(), videoFile)
+//            )
+//            .build()
+//
+//        // Create the POST request to the API endpoint
+//        val request = Request.Builder()
+//            .url("https://api.cloudinary.com/v1_1/dvwtwyunm/video/upload") // Replace with your API endpoint
+//            .post(requestBody)
+//            .build()
+//
+//        // Execute the request
+//        return client.newCall(request).execute()
+  //  }
 }
